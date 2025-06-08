@@ -23,7 +23,6 @@ var (
 	interval    string
 	template    string
 	apiKey      string
-	interactive bool
 )
 
 func init() {
@@ -31,17 +30,12 @@ func init() {
 	generateCmd.Flags().StringVarP(&interval, "interval", "i", "", "Time interval (daily, weekly, monthly)")
 	generateCmd.Flags().StringVarP(&template, "template", "t", "", "Message template (report, transcript, summary)")
 	generateCmd.Flags().StringVar(&apiKey, "api-key", "", "Gemini API key")
-	generateCmd.Flags().BoolVarP(&interactive, "interactive", "", false, "Interactive mode")
 }
 
 func runGenerate(cmd *cobra.Command, args []string) error {
 	cfg, err := config.Load()
 	if err != nil {
 		return fmt.Errorf("failed to load config: %w", err)
-	}
-
-	if interactive {
-		return runInteractiveGenerate(cfg)
 	}
 
 	if author == "" {
@@ -62,7 +56,7 @@ func runGenerate(cmd *cobra.Command, args []string) error {
 	if apiKey == "" {
 		apiKey = cfg.APIKey
 		if apiKey == "" {
-			return fmt.Errorf("Gemini API key is required. Use --api-key flag or set GEMINI_API_KEY env var")
+			return fmt.Errorf("gemini API key is required. Use --api-key flag or set GEMINI_API_KEY env var")
 		}
 	}
 
@@ -97,11 +91,6 @@ func runGenerate(cmd *cobra.Command, args []string) error {
 	fmt.Println(strings.Repeat("=", 50))
 	fmt.Println(message)
 
-	return nil
-}
-
-func runInteractiveGenerate(cfg *config.Config) error {
-	fmt.Println("Interactive mode - coming soon!")
 	return nil
 }
 
