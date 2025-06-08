@@ -85,7 +85,7 @@ func createDefaultConfig(path string) (*Config, error) {
 		Intervals: map[string]Interval{
 			"daily": {
 				Since: "yesterday.midnight",
-				Until: "midnight",
+				Until: "now",
 				Name:  "Daily",
 			},
 			"weekly": {

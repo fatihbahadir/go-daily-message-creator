@@ -130,7 +130,7 @@ Provides brief summaries highlighting the most important changes.
 
 ## Time Intervals
 
-- **daily**: Yesterday midnight to current midnight
+- **daily**: Yesterday midnight to now
 - **weekly**: Last 7 days
 - **monthly**: Last 30 days
 
