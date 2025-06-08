@@ -90,9 +90,9 @@ cd /path/to/your/project
 gdmc generate
 
 # Specific examples
-gdmc generate --author="john@company.com" --type=report --interval=weekly
-gdmc generate --author="jane@team.com" --type=transcript --interval=daily
-gdmc generate --author="dev@startup.com" --type=summary --interval=monthly
+gdmc generate --author="john@company.com" -t=report --i=weekly
+gdmc generate --author="jane@team.com" --t=transcript --i=daily
+gdmc generate --author="dev@startup.com" --t=summary --i=monthly
 
 # Show help
 gdmc --help
@@ -103,7 +103,7 @@ gdmc generate --help
 
 ### 📋 Report (Professional Status Report)
 ```bash
-gdmc generate --type=report
+gdmc generate -t=report
 ```
 Generates structured status reports with:
 - Summary of accomplishments
@@ -114,7 +114,7 @@ Generates structured status reports with:
 
 ### 🗣️ Transcript (Meeting Format)
 ```bash
-gdmc generate --type=transcript
+gdmc generate -t=transcript
 ```
 Creates standup meeting updates with:
 - What was accomplished
@@ -124,7 +124,7 @@ Creates standup meeting updates with:
 
 ### 📝 Summary (Concise Overview)
 ```bash
-gdmc generate --type=summary
+gdmc generate -t=summary
 ```
 Provides brief summaries highlighting the most important changes.
 
@@ -153,7 +153,7 @@ Configuration is stored in `~/.config/gdmc/config.json`
 ### Daily Standup Report
 ```bash
 cd ~/projects/my-awesome-app
-gdmc generate --type=transcript --interval=daily
+gdmc generate -t=transcript -i=daily
 ```
 
 Output example:
@@ -167,13 +167,13 @@ Output example:
 ### Weekly Team Update
 ```bash
 cd ~/work/backend-service
-gdmc generate --author="team-lead@company.com" --type=report --interval=weekly
+gdmc generate --author="team-lead@company.com" -t=report -i=weekly
 ```
 
 ### Monthly Summary for Multiple Contributors
 ```bash
 cd ~/open-source/project
-gdmc generate --author="contributor@domain.com" --type=summary --interval=monthly
+gdmc generate --author="contributor@domain.com" -t=summary -i=monthly
 ```
 
 ## Template Customization
