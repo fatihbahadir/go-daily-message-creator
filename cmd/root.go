@@ -18,7 +18,7 @@ var rootCmd = &cobra.Command{
 
 	Usage:
 	cd /path/to/your/git/repository
-	gdmc generate --author="your@email.com" --type=report --interval=daily`,
+	gdmc generate --author="your@email.com" -t=report -i=daily -l=en`,
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
 	},

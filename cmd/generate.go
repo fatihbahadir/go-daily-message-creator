@@ -23,6 +23,7 @@ var (
 	interval    string
 	template    string
 	apiKey      string
+	language    string
 )
 
 func init() {
@@ -30,6 +31,7 @@ func init() {
 	generateCmd.Flags().StringVarP(&interval, "interval", "i", "", "Time interval (daily, weekly, monthly)")
 	generateCmd.Flags().StringVarP(&template, "template", "t", "", "Message template (report, transcript, summary)")
 	generateCmd.Flags().StringVar(&apiKey, "api-key", "", "Gemini API key")
+	generateCmd.Flags().StringVarP(&language, "language", "l", "", "Output language (en, tr)")
 }
 
 func runGenerate(cmd *cobra.Command, args []string) error {
@@ -51,6 +53,10 @@ func runGenerate(cmd *cobra.Command, args []string) error {
 
 	if interval == "" {
 		interval = "daily"
+	}
+
+	if language == "" {
+		language = cfg.Language
 	}
 
 	if apiKey == "" {
@@ -80,9 +86,10 @@ func runGenerate(cmd *cobra.Command, args []string) error {
 	}
 
 	fmt.Printf("Found %d commits for %s period\n", len(commits), interval)
+	fmt.Printf("Language: %s\n", language)
 
 	geminiClient := gemini.NewClient(apiKey, cfg)
-	message, err := geminiClient.GenerateMessage(commits, template, interval, author)
+	message, err := geminiClient.GenerateMessage(commits, template, interval, author, language)
 	if err != nil {
 		return fmt.Errorf("failed to generate message: %w", err)
 	}

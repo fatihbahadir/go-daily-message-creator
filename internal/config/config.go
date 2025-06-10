@@ -12,6 +12,7 @@ type Config struct {
 	APIKey      string              `json:"api_key,omitempty"`
 	DefaultType string              `json:"default_type"`
 	Intervals   map[string]Interval `json:"intervals"`
+	Language    string              `json:"language"`
 	Templates   map[string]Template `json:"templates"`
 	GitSettings GitSettings         `json:"git_settings"`
 }
@@ -82,6 +83,7 @@ func createDefaultConfig(path string) (*Config, error) {
 	config := &Config{
 		Author:      "",
 		DefaultType: "report",
+		Language:    "en",
 		Intervals: map[string]Interval{
 			"daily": {
 				Since: "yesterday.midnight",
@@ -103,7 +105,12 @@ func createDefaultConfig(path string) (*Config, error) {
 			"report": {
 				Name:        "Status Report",
 				Description: "Professional status report format",
-				Prompt: `Based on the following git commits from the {{.Interval}} period, create a professional status report:
+				Prompt: `Based on the following git commits from the {{.Interval}} period, create a professional status report, write it in 
+				{{ if eq .Language "tr" }}
+				Turkish
+				{{ else }}
+				English
+				{{ end }}:
 				Git Commits:
 				{{.Commits}}
 
@@ -119,7 +126,12 @@ func createDefaultConfig(path string) (*Config, error) {
 			"transcript": {
 				Name:        "Meeting Transcript",
 				Description: "Daily standup meeting format",
-				Prompt: `Based on the following git commits from the {{.Interval}} period, create a standup meeting update:
+				Prompt: `Based on the following git commits from the {{.Interval}} period, create a standup meeting update, write it in 
+				{{ if eq .Language "tr" }}
+				Turkish
+				{{ else }}
+				English
+				{{ end }}:
 
 				Git Commits:
 				{{.Commits}}
@@ -135,7 +147,12 @@ func createDefaultConfig(path string) (*Config, error) {
 			"summary": {
 				Name:        "Work Summary",
 				Description: "Concise work summary",
-				Prompt: `Summarize the following git commits from the {{.Interval}} period:
+				Prompt: `Summarize the following git commits from the {{.Interval}} period, write it in 
+				{{ if eq .Language "tr" }}
+				Turkish
+				{{ else }}
+				English
+				{{ end }}:
 
 				{{.Commits}}
 

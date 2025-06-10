@@ -9,6 +9,7 @@
 - ⏰ **Multiple Intervals**: Daily, weekly, monthly analysis
 - 🎯 **Customizable Templates**: Fully configurable message templates
 - 🌍 **Global Tool**: Works in any git repository
+- 🌐 **Multi-language Support**: Generate messages in Turkish or English
 - 🔧 **Configurable**: Save preferences and API keys
 
 ## Installation
@@ -74,6 +75,9 @@ gdmc config set author "your-email@example.com"
 # Set your Gemini API key
 gdmc config set api_key "your-gemini-api-key"
 
+# Set your preferred language (en for English, tr for Turkish)
+gdmc config set language "en"
+
 # Alternative: Set as environment variable
 export GEMINI_API_KEY="your-gemini-api-key"
 
@@ -91,9 +95,9 @@ cd /path/to/your/project
 gdmc generate
 
 # Specific examples
-gdmc generate --author="john@company.com" -t=report --i=weekly
-gdmc generate --author="jane@team.com" --t=transcript --i=daily
-gdmc generate --author="dev@startup.com" --t=summary --i=monthly
+gdmc generate --author="john@company.com" -t=report -i=weekly
+gdmc generate --author="jane@team.com" -t=transcript -i=daily
+gdmc generate --author="dev@startup.com" -t=summary -i=monthly
 
 # Show help
 gdmc --help
@@ -145,6 +149,7 @@ gdmc config show
 gdmc config set author "your@email.com"
 gdmc config set default_type "report"
 gdmc config set api_key "your-gemini-key"
+gdmc config set language "en"  # or "tr" for Turkish
 ```
 
 Configuration is stored in `~/.config/gdmc/config.json`
@@ -183,6 +188,9 @@ Templates are fully customizable through the config file. Each template supports
 - `{{.Commits}}`: List of git commits
 - `{{.Interval}}`: Time period name
 - `{{.Author}}`: Author email
+- `{{.Language}}`: Current language setting (en/tr)
+
+Language-specific content is handled automatically based on your language configuration.
 
 ## Git Settings
 

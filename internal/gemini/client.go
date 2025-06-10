@@ -21,6 +21,7 @@ type TemplateData struct {
 	Commits  string
 	Interval string
 	Author   string
+	Language string
 }
 
 func NewClient(apiKey string, cfg *config.Config) *Client {
@@ -30,7 +31,7 @@ func NewClient(apiKey string, cfg *config.Config) *Client {
 	}
 }
 
-func (c *Client) GenerateMessage(commits []string, templateKey, intervalKey, author string) (string, error) {
+func (c *Client) GenerateMessage(commits []string, templateKey, intervalKey, author, language string) (string, error) {
 	tmpl, exists := c.config.Templates[templateKey]
 	if !exists {
 		return "", fmt.Errorf("unknown template: %s", templateKey)
@@ -45,6 +46,7 @@ func (c *Client) GenerateMessage(commits []string, templateKey, intervalKey, aut
 		Commits:  strings.Join(commits, "\n"),
 		Interval: interval.Name,
 		Author:   author,
+		Language: language,
 	}
 
 	prompt, err := c.processTemplate(tmpl.Prompt, data)

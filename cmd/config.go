@@ -40,6 +40,7 @@ func showConfig(cmd *cobra.Command, args []string) error {
 
 	fmt.Printf("Author: %s\n", cfg.Author)
 	fmt.Printf("Default Template: %s\n", cfg.DefaultType)
+	fmt.Printf("Language: %s\n", cfg.Language)
 	fmt.Printf("API Key: %s\n", maskAPIKey(cfg.APIKey))
 
 	fmt.Println("\nAvailable Intervals:")
@@ -51,6 +52,10 @@ func showConfig(cmd *cobra.Command, args []string) error {
 	for key, tmpl := range cfg.Templates {
 		fmt.Printf("  %s: %s - %s\n", key, tmpl.Name, tmpl.Description)
 	}
+
+	fmt.Println("\nAvailable Languages:")
+	fmt.Printf("  %s: %s\n", "en", "English")
+	fmt.Printf("  %s: %s\n", "tr", "Turkish")
 
 	return nil
 }
@@ -73,6 +78,11 @@ func setConfig(cmd *cobra.Command, args []string) error {
 		cfg.DefaultType = value
 	case "api_key":
 		cfg.APIKey = value
+	case "language":
+		if value != "en" && value != "tr" {
+			return fmt.Errorf("unknown language: %s", value)
+		}
+		cfg.Language = value
 	default:
 		return fmt.Errorf("unknown config key: %s", key)
 	}
