@@ -155,6 +155,10 @@ Configuration is stored in `~/.config/gdmc/config.json`
 
 ## Real-World Examples
 
+### Daily Message 
+![Example Screenshot](assets/ex.png)
+
+
 ### Daily Standup Report
 ```bash
 cd ~/projects/my-awesome-app
