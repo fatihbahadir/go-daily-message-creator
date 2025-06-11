@@ -215,7 +215,7 @@ echo 'export PATH=$PATH:$(go env GOPATH)/bin' >> ~/.zshrc
 ### No commits found
 - Ensure you're in a git repository: `git status`
 - Check author email matches your git config: `git config user.email`
-- Verify the time interval has commits: `git log --oneline --since="yesterday"`
+- Verify the time interval has commits: `git log --since="yesterday"`
 
 ### API errors
 - Verify API key: `gdmc config show`

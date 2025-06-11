@@ -96,7 +96,6 @@ func (cf *CommitFetcher) buildGitArgs(author string, interval config.Interval) [
 		args = append(args, "--no-merges")
 	}
 
-	args = append(args, "--oneline")
 	args = append(args, fmt.Sprintf("--author=%s", author))
 
 	// Add exclude paths
