@@ -26,7 +26,6 @@
 # Clone the repository
 git clone https://github.com/fatihbahadir/go-daily-message-creator.git
 cd go-daily-message-creator
-go mod tidy
 
 # Install globally
 go install .
