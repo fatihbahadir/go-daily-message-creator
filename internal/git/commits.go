@@ -44,12 +44,21 @@ func (cf *CommitFetcher) FetchCommits(author, intervalKey string) ([]string, err
 		return nil, fmt.Errorf("git command failed: %w. Make sure you have commits from author '%s'", err, author)
 	}
 
-	commits := strings.Split(strings.TrimSpace(string(output)), "\n")
-	if len(commits) == 1 && commits[0] == "" {
+	lines := strings.Split(strings.TrimSpace(string(output)), "\n")
+	if len(lines) == 1 && lines[0] == "" {
 		return []string{}, nil
 	}
 
-	return commits, nil
+	commitCount := 0
+	for _, line := range lines {
+		if strings.HasPrefix(line, "commit ") {
+			commitCount++
+		}
+	}
+
+	fmt.Printf("Found %d commits from %s to %s period\n", commitCount, interval.Since, interval.Until)
+
+	return lines, nil
 }
 
 func (cf *CommitFetcher) isGitRepository() bool {

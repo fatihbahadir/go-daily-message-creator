@@ -19,11 +19,11 @@ var generateCmd = &cobra.Command{
 }
 
 var (
-	author      string
-	interval    string
-	template    string
-	apiKey      string
-	language    string
+	author   string
+	interval string
+	template string
+	apiKey   string
+	language string
 )
 
 func init() {
@@ -85,7 +85,6 @@ func runGenerate(cmd *cobra.Command, args []string) error {
 		return nil
 	}
 
-	fmt.Printf("Found %d commits for %s period\n", len(commits), interval)
 	fmt.Printf("Language: %s\n", language)
 
 	geminiClient := gemini.NewClient(apiKey, cfg)
